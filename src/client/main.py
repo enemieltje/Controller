@@ -27,9 +27,9 @@ def set_axis(name, channel):
 set_axis("ABS_X", 0)
 set_axis("ABS_Y", 1)
 set_axis("ABS_Z", 2)
-set_axis("RABS_X", 3)
-set_axis("RABS_Y", 4)
-set_axis("RABS_Z", 5)
+set_axis("ABS_RX", 3)
+set_axis("ABS_RY", 4)
+set_axis("ABS_RZ", 5)
 
 while True:
     data = {}
