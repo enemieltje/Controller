@@ -7,8 +7,8 @@ from time import sleep
 pot = MCP3008(0)
 
 while True:
-    print(pot.value)
-    sleep(0.1)
+    print(pot.value * 2**16)
+    sleep(0.01)
 
 # for i in range(100):
 #     requests.get('http://localhost:8080')
