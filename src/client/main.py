@@ -11,7 +11,7 @@ y = MCP3008(1)
 while True:
     valuex = math.floor(x.value * 2**16)
     valuey = math.floor(y.value * 2**16)
-    print(f"x: {valuex:05}, y: {valuey:05} \r")
+    print(f"x: {valuex:05}, y: {valuey:05}", end="\r")
     sleep(0.01)
 
 # for i in range(100):
