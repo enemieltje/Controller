@@ -41,7 +41,7 @@ while True:
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
         rolling_averages[name][ri] = math.floor(
-            (channel.value * 2**16) / ri_max)
+            (channel.value * 2**16) / ri_max * 2)
         data[name] += rolling_averages[name][ri]
         ri = (ri + 1) % ri_max
 
