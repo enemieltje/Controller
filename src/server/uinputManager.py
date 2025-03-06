@@ -12,12 +12,12 @@ events = (
     uinput.BTN_TR,
     uinput.BTN_THUMBL,
     uinput.BTN_THUMBR,
-    uinput.ABS_X + (0, 255, 0, 0),
-    uinput.ABS_Y + (0, 255, 0, 0),
-    uinput.ABS_Z + (0, 255, 0, 0),
-    uinput.ABS_RX + (0, 255, 0, 0),
-    uinput.ABS_RY + (0, 255, 0, 0),
-    uinput.ABS_RZ + (0, 255, 0, 0),
+    uinput.ABS_X + (0, 2**16, 0, 0),
+    uinput.ABS_Y + (0, 2**16, 0, 0),
+    uinput.ABS_Z + (0, 2**16, 0, 0),
+    uinput.ABS_RX + (0, 2**16, 0, 0),
+    uinput.ABS_RY + (0, 2**16, 0, 0),
+    uinput.ABS_RZ + (0, 2**16, 0, 0),
 )
 
 device = uinput.Device(

@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-
+import json
+from eventmap import event_map
 # from uinputManager import device
 import uinputManager
 import uinput
@@ -11,7 +12,7 @@ serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        print(self.path)
+        # print(self.path)
 
         match self.path:
             case "/":
@@ -26,14 +27,23 @@ class MyServer(BaseHTTPRequestHandler):
 
     def do_POST(self):
 
+        self.send_response(200)
+        self.end_headers()
+
         match self.path:
             case "/":
                 print(__name__)
                 # time.sleep(1)
                 uinputManager.test(uinputManager.device)
             case "/uinput/emit":
-                self.request.json
-                uinputManager.device.emit()
+                pass
+                jsonString = self.rfile.read(
+                    int(self.headers['Content-Length']))
+                data = json.loads(jsonString)
+
+                for event, value in data.items():
+                    print(f" e: {event}, v: {value}")
+                    uinputManager.device.emit(event_map[event], value)
 
 
 def startServer():
