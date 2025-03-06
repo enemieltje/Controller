@@ -1,9 +1,6 @@
 import math
-import time
-import uinput
 import requests
-from gpiozero import PWMLED, MCP3008
-from time import sleep
+from gpiozero import MCP3008
 
 # create an object called pot that refers to MCP3008 channel 0
 # x = MCP3008(0)
