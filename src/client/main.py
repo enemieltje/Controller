@@ -46,8 +46,8 @@ while True:
         ri = (ri + 1) % ri_max
     data["ABS_Z"] = data["ABS_Z"]*3/10
 
-    try:
-        requests.post('http://192.168.2.50:8080/uinput/emit',
-                      json=data)
-    except:
-        print("Server not responding", end="\r")
+    # try:
+    requests.post('http://192.168.2.50:8080/uinput/emit',
+                  json=data)
+    # except:
+    #     print("Server not responding", end="\r")
