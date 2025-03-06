@@ -20,7 +20,7 @@ from gpiozero import MCP3008
 channels = {}
 
 
-def set_axis(channel, name):
+def set_axis(name, channel):
     channels[name] = MCP3008(channel)
 
 
