@@ -27,6 +27,7 @@ ri = 0
 def set_axis(name, channel):
     channels[name] = MCP3008(channel)
     rolling_averages[name] = []
+    data[name] = 0
 
 
 set_axis("ABS_X", 0)
