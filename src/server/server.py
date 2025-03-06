@@ -5,7 +5,7 @@ import uinputManager
 import uinput
 import time
 
-hostName = "localhost"
+hostName = "0.0.0.0"
 serverPort = 8080
 
 
@@ -18,13 +18,22 @@ class MyServer(BaseHTTPRequestHandler):
                 print(__name__)
                 # time.sleep(1)
                 uinputManager.test(uinputManager.device)
-            case "/uinput/emit":
-                uinputManager.device.emit()
 
         self.send_response(200)
         # self.send_header("Content-type", "text/html")
         self.end_headers()
         # self.wfile.write(open("src/server/index.html").read().encode())
+
+    def do_POST(self):
+
+        match self.path:
+            case "/":
+                print(__name__)
+                # time.sleep(1)
+                uinputManager.test(uinputManager.device)
+            case "/uinput/emit":
+                self.request.json
+                uinputManager.device.emit()
 
 
 def startServer():

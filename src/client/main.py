@@ -12,8 +12,10 @@ while True:
     valuex = math.floor(x.value * 2**16)
     valuey = math.floor(y.value * 2**16)
     print(f"x: {valuex:05}, y: {valuey:05}", end="\r")
+    requests.post('http://192.168.2.50:8080/uinput/emit',
+                  json={"ABS_X": valuex, "ABS_Y": valuey})
     sleep(0.01)
 
 # for i in range(100):
-#     requests.get('http://localhost:8080')
+#     requests.get('http://192.168.2.50:8080')
 #     time.sleep(0.1)
