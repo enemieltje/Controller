@@ -33,7 +33,7 @@ set_axis("RABS_Z", 5)
 
 while True:
     data = {}
-    for name, channel in channels:
+    for name, channel in channels.items():
         data[name] = math.floor(channel.value * 2**16)
     requests.post('http://192.168.2.50:8080/uinput/emit',
                   json=data)
