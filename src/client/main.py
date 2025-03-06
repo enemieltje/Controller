@@ -18,10 +18,15 @@ from gpiozero import MCP3008
 #     requests.get('http://192.168.2.50:8080')
 #     time.sleep(0.1)
 channels = {}
+rolling_averages = {}
+data = {}
+ri_max = 10
+ri = 0
 
 
 def set_axis(name, channel):
     channels[name] = MCP3008(channel)
+    rolling_averages[name] = []
 
 
 set_axis("ABS_X", 0)
@@ -32,8 +37,11 @@ set_axis("ABS_RY", 4)
 set_axis("ABS_RZ", 5)
 
 while True:
-    data = {}
     for name, channel in channels.items():
-        data[name] = math.floor(channel.value * 2**16)
+        data[name] -= rolling_averages[name][ri]
+        rolling_averages[name][ri] = math.floor(channel.value * 2**16)
+        data[name] += rolling_averages[name][ri]
+        ri = (ri + 1) % ri_max
+
     requests.post('http://192.168.2.50:8080/uinput/emit',
                   json=data)
