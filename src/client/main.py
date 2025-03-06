@@ -44,6 +44,8 @@ while True:
             (channel.value * 2**16) / ri_max * 2)
         data[name] += rolling_averages[name][ri]
         ri = (ri + 1) % ri_max
-
-    requests.post('http://192.168.2.50:8080/uinput/emit',
-                  json=data)
+    try:
+        requests.post('http://192.168.2.50:8080/uinput/emit',
+                      json=data)
+    except:
+        print("Server not responding", end="\r")

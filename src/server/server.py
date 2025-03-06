@@ -11,6 +11,11 @@ serverPort = 8080
 
 
 class MyServer(BaseHTTPRequestHandler):
+
+    def log_request(self, *args) -> None:
+        pass
+        # return super().log_message(format, *args)
+
     def do_GET(self):
         # print(self.path)
 
@@ -42,7 +47,7 @@ class MyServer(BaseHTTPRequestHandler):
                 data = json.loads(jsonString)
 
                 for event, value in data.items():
-                    print(f" e: {event}, v: {value}")
+                    # print(f" e: {event}, v: {value}")
                     uinputManager.device.emit(event_map[event], value)
 
 
