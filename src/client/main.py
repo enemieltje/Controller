@@ -51,7 +51,7 @@ t_old = time.process_time_ns()
 (x, y, z) = (0, 0, 0)
 while True:
     t = time.process_time_ns()
-    dt = t_old - t / 1000000
+    dt = (t_old - t) / 1000000
     t_old = t
 
     (ax, ay, az) = sensor.linear_acceleration
