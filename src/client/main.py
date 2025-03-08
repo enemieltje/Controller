@@ -46,9 +46,9 @@ print("")
 print("")
 print("")
 t_old = time.process_time_ns()
-(ax, ay, az) = 0
-(vx, vy, vz) = 0
-(x, y, z) = 0
+(ax, ay, az) = (0, 0, 0)
+(vx, vy, vz) = (0, 0, 0)
+(x, y, z) = (0, 0, 0)
 while True:
     t = time.process_time_ns()
     dt = t_old - t / 1000000
