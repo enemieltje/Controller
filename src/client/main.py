@@ -60,9 +60,9 @@ while True:
 
     print("\033[1A\x1b[2K"*5)
     print(f"dt: {dt}")
-    print(f"a: {ax}, {ay}, {az}")
-    print(f"v: {vx}, {vy}, {vz}")
-    print(f"pos: {x}, {y}, {z}")
+    print(f"a: {ax:6.1}, {ay:6.1}, {az:6.1}")
+    print(f"v: {vx:6.1}, {vy:6.1}, {vz:6.1}")
+    print(f"pos: {x:6.1}, {y:6.1}, {z:6.1}")
     # time.sleep(0.1)
 
     for name, channel in channels.items():
