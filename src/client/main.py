@@ -45,12 +45,23 @@ set_axis("ABS_RZ", 5)
 print("")
 print("")
 print("")
+t_old = time.process_time_ns()
+(ax, ay, az) = 0
+(vx, vy, vz) = 0
+(x, y, z) = 0
 while True:
+    t = time.process_time_ns()
+    dt = t_old - t / 1000000
+    t_old = t
+
+    (ax, ay, az) = sensor.linear_acceleration
+    (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
+    (x, y, z) = (x + (vx * dt), y + (vy * dt), z + (vz * dt))
 
     print("\033[1A\x1b[2K"*4)
     print(f"gravity: {sensor.gravity}")
     print(f"euler: {sensor.euler}")
-    print(f"lacc: {sensor.linear_acceleration}")
+    print(f"pos: {x}, {y}, {z}")
     # time.sleep(0.1)
 
     for name, channel in channels.items():
