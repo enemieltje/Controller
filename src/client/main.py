@@ -6,7 +6,7 @@ import adafruit_bno055
 import board
 
 i2c = board.I2C()
-# sensor = adafruit_bno055.BNO055_I2C(i2c)
+sensor = adafruit_bno055.BNO055_I2C(i2c)
 
 # create an object called pot that refers to MCP3008 channel 0
 # x = MCP3008(0)
