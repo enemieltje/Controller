@@ -58,11 +58,11 @@ while True:
     t_old = t
 
     (ax, ay, az) = sensor.linear_acceleration
+    (mx, my, mz) = sensor.magnetic
     if ax:
         (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
         (x, y, z) = (x + (0.5 * ax * dt * dt), y +
                      (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
-        (mx, my, mz) = sensor.magnetic
 
         xadjust = 0.5*dt*dt*ax
         if xadjust > 0.01:
