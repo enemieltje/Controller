@@ -7,6 +7,7 @@ import board
 
 i2c = board.I2C()
 sensor = adafruit_bno055.BNO055_I2C(i2c)
+# sensor.mode = adafruit_bno055.IMUPLUS_MODE
 
 # create an object called pot that refers to MCP3008 channel 0
 # x = MCP3008(0)
@@ -49,24 +50,38 @@ t_old = time.process_time()
 (ax, ay, az) = (0, 0, 0)
 (vx, vy, vz) = (0, 0, 0)
 (x, y, z) = (0, 0, 0)
+posx = 0
 while True:
     t = time.process_time()
     dt = t - t_old
     t_old = t
 
     (ax, ay, az) = sensor.linear_acceleration
-    # (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
-    # (x, y, z) = (x + (0.5 * ax * dt * dt), y +
-    #              (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
+    (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
+    (x, y, z) = (x + (0.5 * ax * dt * dt), y +
+                 (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
     (mx, my, mz) = sensor.magnetic
+
+    xadjust = 0.5*dt*dt*ax
+    if xadjust > 0.01:
+        posx += xadjust
 
     print("\033[1A\x1b[2K"*4)
     print(f"t: {t}, dt: {dt:1.3}")
-    print(f"a: {ax:6.1}, {ay:6.1}, {az:6.1}")
+    print(f"a: {ax}, {ay:6.1}, {az:6.1}")
     # print(f"v: {vx:6.1}, {vy:6.1}, {vz:6.1}")
-    # print(f"pos: {x:6.1}, {y:6.1}, {z:6.1}")
-    print(f"mag: {mx:4.2}, {my:4.2}, {mz:4.2}")
+    print(f"pos: {posx}, {y}, {z:6.1}")
+    # print(f"mag: {mx:4.2}, {my:4.2}, {mz:4.2}")
     # # time.sleep(1)
+    data["AX"] = ax
+    data["AY"] = ay
+    data["AZ"] = az
+    data["VX"] = vx
+    data["VY"] = vy
+    data["VZ"] = vz
+    data["X"] = posx
+    data["Y"] = y
+    data["Z"] = z
     data["MX"] = mx
     data["MY"] = my
     data["MZ"] = mz
