@@ -45,13 +45,13 @@ set_axis("ABS_RZ", 5)
 print("")
 print("")
 print("")
-t_old = time.process_time_ns()
+t_old = time.process_time()
 (ax, ay, az) = (0, 0, 0)
 (vx, vy, vz) = (0, 0, 0)
 (x, y, z) = (0, 0, 0)
 while True:
-    t = time.process_time_ns()
-    dt = (t - t_old) / 1000000
+    t = time.process_time()
+    dt = t - t_old
     t_old = t
 
     (ax, ay, az) = sensor.linear_acceleration
