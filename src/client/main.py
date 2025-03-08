@@ -58,9 +58,10 @@ while True:
     (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
     (x, y, z) = (x + (vx * dt), y + (vy * dt), z + (vz * dt))
 
-    print("\033[1A\x1b[2K"*4)
-    print(f"gravity: {sensor.gravity}")
-    print(f"euler: {sensor.euler}")
+    print("\033[1A\x1b[2K"*5)
+    print(f"dt: {dt}")
+    print(f"a: {ax}, {ay}, {az}")
+    print(f"v: {vx}, {vy}, {vz}")
     print(f"pos: {x}, {y}, {z}")
     # time.sleep(0.1)
 
