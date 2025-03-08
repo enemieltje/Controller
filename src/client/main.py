@@ -1,4 +1,5 @@
 import math
+import time
 import requests
 from gpiozero import MCP3008
 import adafruit_bno055
@@ -47,7 +48,8 @@ while True:
     print(f"gravity: {sensor.gravity}")
     print(f"euler: {sensor.euler}")
     print(f"lacc: {sensor.linear_acceleration}")
-    print("\033[1A\033[1A\033[1A")
+    print("\033[1A\033[1A\033[1A\033[1A")
+    time.sleep(0.1)
 
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
