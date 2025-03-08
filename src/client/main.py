@@ -55,16 +55,16 @@ while True:
     t_old = t
 
     (ax, ay, az) = sensor.linear_acceleration
-    (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
-    (x, y, z) = (x + (0.5 * ax * dt * dt), y +
-                 (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
+    # (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
+    # (x, y, z) = (x + (0.5 * ax * dt * dt), y +
+    #              (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
     (mx, my, mz) = sensor.magnetic
 
-    print("\033[1A\x1b[2K"*6)
+    print("\033[1A\x1b[2K"*4)
     print(f"t: {t}, dt: {dt:1.3}")
     print(f"a: {ax:6.1}, {ay:6.1}, {az:6.1}")
-    print(f"v: {vx:6.1}, {vy:6.1}, {vz:6.1}")
-    print(f"pos: {x:6.1}, {y:6.1}, {z:6.1}")
+    # print(f"v: {vx:6.1}, {vy:6.1}, {vz:6.1}")
+    # print(f"pos: {x:6.1}, {y:6.1}, {z:6.1}")
     print(f"mag: {mx:4.2}, {my:4.2}, {mz:4.2}")
     # time.sleep(1)
 
