@@ -51,6 +51,7 @@ t_old = time.process_time()
 (vx, vy, vz) = (0, 0, 0)
 (x, y, z) = (0, 0, 0)
 posx = 0
+xadjust = 0
 while True:
     t = time.process_time()
     dt = t - t_old
