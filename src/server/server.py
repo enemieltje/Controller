@@ -5,9 +5,33 @@ from eventmap import event_map
 import uinputManager
 import uinput
 import time
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 hostName = "0.0.0.0"
 serverPort = 8080
+
+# x = 0
+# for i in range(100):
+#     x = x + 0.04
+#     y = np.sin(x)
+#     plt.scatter(x, y)
+#     plt.title("Real Time plot")
+#     plt.xlabel("x")
+#     plt.ylabel("sinx")
+#     plt.pause(0.05)
+
+plt.show()
+
+
+def plot(v):
+    t = time.process_time()
+    plt.scatter(t, v)
+    plt.title("Sensor Values")
+    plt.xlabel("t")
+    plt.ylabel("v")
+    plt.pause(0.05)
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -47,7 +71,8 @@ class MyServer(BaseHTTPRequestHandler):
                 data = json.loads(jsonString)
 
                 for event, value in data.items():
-                    # print(f" e: {event}, v: {value}")
+                    print(f" e: {event}, v: {value}")
+                    plot(value)
                     event_code = event_map.get(event)
                     # if event == "ABS_X":
                     #     uinputManager.rotate(
