@@ -42,14 +42,16 @@ set_axis("ABS_Z", 2)
 set_axis("ABS_RX", 3)
 set_axis("ABS_RY", 4)
 set_axis("ABS_RZ", 5)
-
+print("")
+print("")
+print("")
 while True:
 
+    print("\033[1A\x1b[2K"*4)
     print(f"gravity: {sensor.gravity}")
     print(f"euler: {sensor.euler}")
     print(f"lacc: {sensor.linear_acceleration}")
-    print("\033[1A\033[1A\033[1A\033[1A")
-    time.sleep(0.1)
+    # time.sleep(0.1)
 
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
