@@ -51,7 +51,7 @@ class MyServer(BaseHTTPRequestHandler):
                     event_code = event_map.get(event)
                     if not event_code:
                         continue
-                    uinputManager.device.emit(event_map[event], value)
+                    uinputManager.device.emit(event_code, value)
 
 
 def startServer():
