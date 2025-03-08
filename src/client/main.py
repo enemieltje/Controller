@@ -64,7 +64,7 @@ while True:
     print(f"a: {ax:6.1}, {ay:6.1}, {az:6.1}")
     print(f"v: {vx:6.1}, {vy:6.1}, {vz:6.1}")
     print(f"pos: {x:6.1}, {y:6.1}, {z:6.1}")
-    time.sleep(1)
+    # time.sleep(1)
 
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
