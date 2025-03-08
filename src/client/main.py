@@ -1,6 +1,11 @@
 import math
 import requests
 from gpiozero import MCP3008
+import adafruit_bno055
+import board
+
+i2c = board.I2C()
+sensor = adafruit_bno055.BNO055_I2C(i2c)
 
 # create an object called pot that refers to MCP3008 channel 0
 # x = MCP3008(0)
@@ -38,6 +43,7 @@ set_axis("ABS_RY", 4)
 set_axis("ABS_RZ", 5)
 
 while True:
+    print(sensor.gravity)
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
         rolling_averages[name][ri] = math.floor(

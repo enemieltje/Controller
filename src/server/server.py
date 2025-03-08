@@ -47,11 +47,72 @@ class MyServer(BaseHTTPRequestHandler):
                 data = json.loads(jsonString)
 
                 for event, value in data.items():
-                    print(f" e: {event}, v: {value}")
+                    # print(f" e: {event}, v: {value}")
                     event_code = event_map.get(event)
-                    if not event_code:
+                    if event == "ABS_X":
+                        uinputManager.rotate(
+                            uinputManager.device, uinput.REL_X, value)
+                    if event == "ABS_Y":
+                        uinputManager.rotate(
+                            uinputManager.device, uinput.REL_Y, value)
+                    if event == "ABS_RX":
+                        uinputManager.pan(
+                            uinputManager.device, uinput.REL_X, value)
+                    if event == "ABS_RY":
+                        uinputManager.pan(
+                            uinputManager.device, uinput.REL_Y, value)
+
+                    # if event == "ABS_X":
+                    #     if value < 30000:
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_LEFT])
+                    #         uinputManager.rotate(
+                    #             uinputManager.device, event_code, value)
+
+                    #     if value > 36000:
+                    #         uinputManager.rotate(
+                    #             uinputManager.device, uinput.REL_X, 1)
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_RIGHT])
+                    # if event == "ABS_Y":
+                    #     if value < 30000:
+                    #         uinputManager.rotate(
+                    #             uinputManager.device, uinput.REL_Y, -1)
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_UP])
+                    #     if value > 36000:
+                    #         uinputManager.rotate(
+                    #             uinputManager.device, uinput.REL_Y, 1)
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_DOWN])
+                    # if event == "ABS_RX":
+                    #     if value < 30000:
+                    #         uinputManager.pan(
+                    #             uinputManager.device, uinput.REL_X, -1)
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_LEFTSHIFT, uinput.KEY_LEFT])
+                    #     if value > 36000:
+                    #         uinputManager.pan(
+                    #             uinputManager.device, uinput.REL_X, 1)
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_LEFTSHIFT, uinput.KEY_RIGHT])
+                    # if event == "ABS_RY":
+                    #     if value < 30000:
+                    #         uinputManager.pan(
+                    #             uinputManager.device, uinput.REL_Y, -1)
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_LEFTSHIFT, uinput.KEY_UP])
+                    #     if value > 36000:
+                    #         uinputManager.pan(
+                    #             uinputManager.device, uinput.REL_Y, 1)
+                    #         # uinputManager.device.emit_combo(
+                    #         #     [uinput.KEY_LEFTCTRL, uinput.KEY_LEFTSHIFT, uinput.KEY_DOWN])
+
+                    #         # time.sleep(1)
                         continue
-                    uinputManager.device.emit(event_code, value)
+                    if event_code:
+                        # uinputManager.device.emit(event_code, value)
+                        continue
 
 
 def startServer():

@@ -1,4 +1,5 @@
 
+import math
 import time
 import uinput
 
@@ -10,8 +11,19 @@ events = (
     uinput.BTN_Y,
     uinput.BTN_TL,
     uinput.BTN_TR,
+    uinput.BTN_LEFT,
+    uinput.BTN_RIGHT,
+    uinput.BTN_MIDDLE,
     uinput.BTN_THUMBL,
     uinput.BTN_THUMBR,
+    uinput.KEY_UP,
+    uinput.KEY_LEFT,
+    uinput.KEY_RIGHT,
+    uinput.KEY_DOWN,
+    uinput.KEY_LEFTSHIFT,
+    uinput.KEY_LEFTCTRL,
+    uinput.REL_X,
+    uinput.REL_Y,
     uinput.ABS_X + (0, 2**16, 0, 0),
     uinput.ABS_Y + (0, 2**16, 0, 0),
     uinput.ABS_Z + (0, 2**16, 0, 0),
@@ -37,16 +49,31 @@ def test(device: uinput.Device):
     device.emit(uinput.BTN_A, 0)
 
 
-def emit(device: uinput.Device, event, value):
-    # device.emit()
-    pass
-
-# Center joystick
-# syn=False to emit an "atomic" (128, 128) event.
-# device.emit(uinput.ABS_X, 50, syn=False)
-# device.emit(uinput.ABS_Y, 50)
+def filter(value, center, dz_min, dz_max, scale):
+    if dz_min < value < dz_max:
+        return
+    return math.floor((value - center)/scale)
 
 
-# device.emit(uinput.BTN_A, 1)
-# time.sleep(1)
-# device.emit(uinput.BTN_A, 0)
+def pan(device: uinput.Device, axis, value):
+    value = filter(value, 33000, 30000, 36000, 3000)
+    if not value:
+        return
+
+    device.emit(uinput.BTN_MIDDLE, 1)
+    device.emit(axis, value)
+    device.emit(uinput.BTN_MIDDLE, 0)
+
+
+def rotate(device: uinput.Device, axis, value):
+    print(f"value: {value}")
+    value = filter(value, 33000, 30000, 36000, 10000)
+    if not value:
+        return
+    print(f"filtered value: {value}")
+
+    device.emit(uinput.KEY_LEFTSHIFT, 1)
+    device.emit(uinput.BTN_MIDDLE, 1)
+    device.emit(axis, value)
+    device.emit(uinput.BTN_MIDDLE, 0)
+    device.emit(uinput.KEY_LEFTSHIFT, 0)
