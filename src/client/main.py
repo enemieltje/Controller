@@ -64,9 +64,9 @@ while True:
         (x, y, z) = (x + (0.5 * ax * dt * dt), y +
                      (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
 
-        xadjust = 0.5*dt*dt*ax
-        if xadjust > 0.01:
-            posx += xadjust
+    xadjust = 0.5*dt*dt*ax
+    if ax > 1:
+        posx += xadjust
 
     print("\033[1A\x1b[2K"*4)
     print(f"t: {t}, dt: {dt}")
