@@ -44,7 +44,7 @@ while True:
             (channel.value * 2**16) / ri_max * 2)
         data[name] += rolling_averages[name][ri]
         ri = (ri + 1) % ri_max
-    data["ABS_RZ"] = math.floor(data["ABS_Z"]*10/3)
+    data["ABS_RZ"] = math.floor((data["ABS_Z"]*10/3)-22400)
 
     try:
         requests.post('http://192.168.2.50:8080/uinput/emit',
