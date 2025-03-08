@@ -51,7 +51,7 @@ t_old = time.process_time_ns()
 (x, y, z) = (0, 0, 0)
 while True:
     t = time.process_time_ns()
-    dt = (t_old - t) / 1000000
+    dt = (t - t_old) / 1000000
     t_old = t
 
     (ax, ay, az) = sensor.linear_acceleration
@@ -59,7 +59,7 @@ while True:
     (x, y, z) = (x + (vx * dt), y + (vy * dt), z + (vz * dt))
 
     print("\033[1A\x1b[2K"*5)
-    print(f"dt: {dt}")
+    print(f"dt: {dt:1.3}")
     print(f"a: {ax:6.1}, {ay:6.1}, {az:6.1}")
     print(f"v: {vx:6.1}, {vy:6.1}, {vz:6.1}")
     print(f"pos: {x:6.1}, {y:6.1}, {z:6.1}")
