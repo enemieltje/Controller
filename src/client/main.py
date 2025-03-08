@@ -44,10 +44,12 @@ while True:
             (channel.value * 2**16) / ri_max * 2)
         data[name] += rolling_averages[name][ri]
         ri = (ri + 1) % ri_max
-    data["ABS_Z"] = math.floor(data["ABS_Z1"]*3/10)
+    data["ABS_Z"] = math.floor(data["ABS_Z1"]*10/3)
 
     try:
         requests.post('http://192.168.2.50:8080/uinput/emit',
                       json=data)
+    except ConnectionRefusedError:
+        print("Server not responding", end="\r")
     except ConnectionError:
         print("Server not responding", end="\r")

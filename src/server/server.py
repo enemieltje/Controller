@@ -47,7 +47,10 @@ class MyServer(BaseHTTPRequestHandler):
                 data = json.loads(jsonString)
 
                 for event, value in data.items():
-                    # print(f" e: {event}, v: {value}")
+                    print(f" e: {event}, v: {value}")
+                    event_code = event_map.get(event)
+                    if not event_code:
+                        continue
                     uinputManager.device.emit(event_map[event], value)
 
 
