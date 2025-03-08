@@ -56,7 +56,8 @@ while True:
 
     (ax, ay, az) = sensor.linear_acceleration
     (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
-    (x, y, z) = (x + (vx * dt), y + (vy * dt), z + (vz * dt))
+    (x, y, z) = (x + (0.5 * ax * dt * dt), y +
+                 (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
 
     print("\033[1A\x1b[2K"*5)
     print(f"t: {t}, dt: {dt:1.3}")
