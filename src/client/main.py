@@ -43,7 +43,7 @@ set_axis("ABS_RY", 4)
 set_axis("ABS_RZ", 5)
 
 while True:
-    print(sensor.gravity)
+    print(f"gravity: {sensor.gravity}")
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
         rolling_averages[name][ri] = math.floor(
