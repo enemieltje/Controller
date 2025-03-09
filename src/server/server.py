@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import threading
 from eventmap import event_map
 # from uinputManager import device
 import uinputManager
@@ -69,11 +70,16 @@ class MyServer(BaseHTTPRequestHandler):
                 jsonString = self.rfile.read(
                     int(self.headers['Content-Length']))
                 data = json.loads(jsonString)
+                threading.Thread(target=plot, args=[data["MX"]]).run()
+                threading.Thread(target=plot, args=[data["MY"]]).run()
+                threading.Thread(target=plot, args=[data["MZ"]]).run()
 
                 for event, value in data.items():
                     print(f" e: {event}, v: {value}")
-                    plot(value)
+                    # plot(value)
                     event_code = event_map.get(event)
+                    # if event == "ABS_X":
+                    #     threading.Thread(target=plot, args=[value]).run()
                     # if event == "ABS_X":
                     #     uinputManager.rotate(
                     #         uinputManager.device, uinput.REL_X, value)

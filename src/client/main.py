@@ -58,7 +58,7 @@ while True:
     t_old = t
 
     (ax, ay, az) = sensor.linear_acceleration
-    (mx, my, mz) = sensor.magnetic
+    (mx, my, mz) = sensor.euler
     if ax:
         (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
         (x, y, z) = (x + (0.5 * ax * dt * dt), y +
