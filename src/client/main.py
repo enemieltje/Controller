@@ -7,7 +7,7 @@ import board
 
 i2c = board.I2C()
 sensor = adafruit_bno055.BNO055_I2C(i2c)
-# sensor.mode = adafruit_bno055.IMUPLUS_MODE
+sensor.mode = adafruit_bno055.IMUPLUS_MODE
 
 # create an object called pot that refers to MCP3008 channel 0
 # x = MCP3008(0)
@@ -59,31 +59,31 @@ while True:
 
     (ax, ay, az) = sensor.linear_acceleration
     (mx, my, mz) = sensor.euler
-    if ax:
-        (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
-        (x, y, z) = (x + (0.5 * ax * dt * dt), y +
-                     (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
+    # if ax:
+    #     (vx, vy, vz) = (vx + (ax * dt), vy + (ay * dt), vz + (az * dt))
+    #     (x, y, z) = (x + (0.5 * ax * dt * dt), y +
+    #                  (0.5 * ay * dt * dt), z + (0.5 * az * dt * dt))
 
-    xadjust = 0.5*dt*dt*ax
-    if math.fabs(ax) > 1:
-        posx += xadjust
+    # xadjust = 0.5*dt*dt*ax
+    # if math.fabs(ax) > 1:
+    #     posx += xadjust
 
-    print("\033[1A\x1b[2K"*4)
-    print(f"t: {t}, dt: {dt}")
-    print(f"a: {ax}, {ay}, {az}")
+    # print("\033[1A\x1b[2K"*4)
+    # print(f"t: {t}, dt: {dt}")
+    # print(f"a: {ax}, {ay}, {az}")
     # print(f"v: {vx:6.1}, {vy:6.1}, {vz:6.1}")
-    print(f"pos: {posx}, {xadjust}, {z}")
+    # print(f"pos: {posx}, {xadjust}, {z}")
     # print(f"mag: {mx:4.2}, {my:4.2}, {mz:4.2}")
     # # time.sleep(1)
-    data["AX"] = ax
-    data["AY"] = ay
-    data["AZ"] = az
-    data["VX"] = vx
-    data["VY"] = vy
-    data["VZ"] = vz
-    data["X"] = posx
-    data["Y"] = y
-    data["Z"] = z
+    # data["AX"] = ax
+    # data["AY"] = ay
+    # data["AZ"] = az
+    # data["VX"] = vx
+    # data["VY"] = vy
+    # data["VZ"] = vz
+    # data["X"] = posx
+    # data["Y"] = y
+    # data["Z"] = z
     data["MX"] = mx
     data["MY"] = my
     data["MZ"] = mz
