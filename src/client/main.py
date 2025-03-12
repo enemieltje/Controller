@@ -1,13 +1,18 @@
 import math
 import time
 import requests
-from gpiozero import MCP3008
+from gpiozero import MCP3008, Button
 import adafruit_bno055
 import board
 
 i2c = board.I2C()
 sensor = adafruit_bno055.BNO055_I2C(i2c)
 sensor.mode = adafruit_bno055.IMUPLUS_MODE
+buttons = [Button(5),
+           Button(6),
+           Button(13),
+           Button(19),
+           Button(26)]
 
 # create an object called pot that refers to MCP3008 channel 0
 # x = MCP3008(0)
@@ -95,6 +100,12 @@ while True:
         data[name] += rolling_averages[name][ri]
         ri = (ri + 1) % ri_max
     data["ABS_RZ"] = math.floor((data["ABS_Z"]-22400)*10/3)
+
+    for button, i in buttons:
+        if button.is_pressed:
+            data[f"BTN_{i}"] = 1
+        else:
+            data[f"BTN_{i}"] = 0
 
     try:
         requests.post('http://192.168.2.50:8080/uinput/emit',
