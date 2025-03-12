@@ -101,8 +101,8 @@ while True:
         ri = (ri + 1) % ri_max
     data["ABS_RZ"] = math.floor((data["ABS_Z"]-22400)*10/3)
 
-    for button, i in buttons:
-        if button.is_pressed:
+    for i in range(len(buttons)):
+        if buttons[i].is_pressed:
             data[f"BTN_{i}"] = 1
         else:
             data[f"BTN_{i}"] = 0
