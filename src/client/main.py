@@ -34,7 +34,13 @@ rolling_averages = {}
 data = {}
 ri_max = 10
 ri = 0
+global mx0, my0, mz0
 (mx0, my0, mz0) = sensor.euler
+
+
+def calibrate():
+    global mx0, my0, mz0
+    (mx0, my0, mz0) = sensor.euler
 
 
 def set_axis(name, channel):
@@ -90,9 +96,9 @@ while True:
     # data["X"] = posx
     # data["Y"] = y
     # data["Z"] = z
-    data["MX"] = mx - mx0
-    data["MY"] = my - my0
-    data["MZ"] = mz - mz0
+    data["MX"] = float((mx - mx0) or 0)
+    data["MY"] = float((my - my0) or 0)
+    data["MZ"] = float((mz - mz0) or 0)
 
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
@@ -105,6 +111,8 @@ while True:
     for i in range(len(buttons)):
         if buttons[i].is_pressed:
             data[f"BTN_{i}"] = 1
+            if i == 0:
+                calibrate()
         else:
             data[f"BTN_{i}"] = 0
 
