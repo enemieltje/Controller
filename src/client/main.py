@@ -40,7 +40,9 @@ global mx0, my0, mz0
 
 def calibrate():
     global mx0, my0, mz0
+    print(f"calibrate old: {mx0}, {my0}, {mz0}")
     (mx0, my0, mz0) = sensor.euler
+    print(f"calibrate new: {mx0}, {my0}, {mz0}")
 
 
 def set_axis(name, channel):
@@ -55,9 +57,8 @@ set_axis("ABS_Z", 2)
 set_axis("ABS_RX", 3)
 set_axis("ABS_RY", 4)
 set_axis("ABS_RZ", 5)
-print("")
-print("")
-print("")
+calibrate()
+
 t_old = time.process_time()
 (ax, ay, az) = (0, 0, 0)
 (vx, vy, vz) = (0, 0, 0)
@@ -111,8 +112,7 @@ while True:
     for i in range(len(buttons)):
         if buttons[i].is_pressed:
             data[f"BTN_{i}"] = 1
-            if i == 0:
-                print(f"calibrate: {mx}, {my}, {mz}")
+            if i == 1:
                 calibrate()
         else:
             data[f"BTN_{i}"] = 0
