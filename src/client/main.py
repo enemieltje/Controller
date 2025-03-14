@@ -34,6 +34,7 @@ rolling_averages = {}
 data = {}
 ri_max = 10
 ri = 0
+(mx0, my0, mz0) = sensor.euler
 
 
 def set_axis(name, channel):
@@ -89,9 +90,9 @@ while True:
     # data["X"] = posx
     # data["Y"] = y
     # data["Z"] = z
-    data["MX"] = mx
-    data["MY"] = my
-    data["MZ"] = mz
+    data["MX"] = mx - mx0
+    data["MY"] = my - my0
+    data["MZ"] = mz - mz0
 
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
