@@ -96,9 +96,9 @@ while True:
     # data["X"] = posx
     # data["Y"] = y
     # data["Z"] = z
-    data["MX"] = float((mx - mx0) or 0)
-    data["MY"] = float((my - my0) or 0)
-    data["MZ"] = float((mz - mz0) or 0)
+    data["MX"] = float(mx or 0) - mx0
+    data["MY"] = float(my or 0) - my0
+    data["MZ"] = float(mz or 0) - mz0
 
     for name, channel in channels.items():
         data[name] -= rolling_averages[name][ri]
@@ -112,6 +112,7 @@ while True:
         if buttons[i].is_pressed:
             data[f"BTN_{i}"] = 1
             if i == 0:
+                print(f"calibrate: {mx}, {my}, {mz}")
                 calibrate()
         else:
             data[f"BTN_{i}"] = 0
