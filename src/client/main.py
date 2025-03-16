@@ -55,10 +55,16 @@ calibrate()
 while True:
 
     (x, y, z) = sensor.euler
+    (qw, qx, qy, qz) = sensor.quaternion
 
     data["MX"] = float(x or 0) - x0
     data["MY"] = float(y or 0) - y0
     data["MZ"] = float(z or 0) - z0
+
+    data["QW"] = float(qw or 0)
+    data["QX"] = float(qx or 0)
+    data["QY"] = float(qy or 0)
+    data["QZ"] = float(qz or 0)
 
     # for name, channel in channels.items():
     #     data[name] -= rolling_averages[name][ri]
