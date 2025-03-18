@@ -19,6 +19,8 @@ buttons = [
     Button(16, pull_up=True),
     Button(24, pull_up=True),
     Button(23, pull_up=True),
+    Button(12, pull_up=True),
+    Button(25, pull_up=True),
 ]
 
 channels = {}
